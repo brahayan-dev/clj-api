@@ -1,13 +1,13 @@
 (ns api.core
   (:require [io.pedestal.http :as http]
             [io.pedestal.http.body-params :as body-params]
-            [api.modules.words :as words]))
+            [api.word.core :as word]))
 
-(defn words-resource [request] (words/handler (:params request)))
+(defn word-resource [request] (word/handler (:params request)))
 
 (def common-interceptors [(body-params/body-params) http/html-body])
 
-(def routes #{["/words" :get (conj common-interceptors `words-resource)]})
+(def routes #{["/word" :get (conj common-interceptors `word-resource)]})
 
 (def service {:env :prod
               ;; You can bring your own non-default interceptors. Make
